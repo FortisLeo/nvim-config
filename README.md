@@ -31,22 +31,13 @@ Start Neovim. Packer is bootstrapped automatically into Neovim's data directory.
 :PackerSync
 ```
 
-Mason installs `rust_analyzer` and `pyright` automatically. Pyright uses Node.js and npm; make sure `node --version` and `npm --version` work if you use Python LSP features.
-
-Treesitter does not auto-install parsers during startup. Install the parsers you need manually, for example:
-
-```vim
-:TSInstall c cpp java lua markdown markdown_inline python query vim vimdoc
-:TSUpdate
-```
-
-Parser compilation needs a C compiler. On Debian/Ubuntu, install the prerequisites with:
+Treesitter automatically installs and updates the configured parsers. Parser compilation needs a C compiler. On Debian/Ubuntu, install the prerequisites with:
 
 ```sh
 sudo apt install build-essential
 ```
 
-The external `tree-sitter` CLI is not required by this configuration.
+If you need a parser that is not configured, install it manually with `:TSInstall <language>`.
 
 If SSH authentication is not configured, use the HTTPS repository URL instead:
 
@@ -143,7 +134,7 @@ If you do not use tmux, these mappings simply behave like normal split navigatio
 
 ### Treesitter
 
-Treesitter provides syntax highlighting. Parsers are intentionally installed manually so a missing external CLI cannot trigger repeated startup errors. Use `:TSInstall <language>` to add a parser, `:TSUpdate` to update parsers, and `:TSInstallInfo` to inspect parser status.
+Treesitter provides syntax highlighting and automatically installs the configured parsers. Use `:TSUpdate` to update parsers, `:TSInstall <language>` to add one, and `:TSInstallInfo` to inspect parser status.
 
 ### Java and file templates
 

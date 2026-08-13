@@ -1,11 +1,10 @@
 local ok, configs = pcall(require, "nvim-treesitter.configs")
 if not ok then return end
 configs.setup {
-  -- Parsers are installed separately with :TSInstall. This avoids requiring
-  -- the external tree-sitter CLI during startup.
-  ensure_installed = {},
+  -- Install and update the configured parsers automatically.
+  ensure_installed = { "c", "cpp", "java", "lua", "markdown", "markdown_inline", "python", "query", "vim", "vimdoc" },
   sync_install = false,
-  auto_install = false,
+  auto_install = true,
 
   -- List of parsers to ignore installing (or "all")
   ignore_install = { "javascript" },
