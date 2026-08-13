@@ -19,22 +19,13 @@ return require("packer").startup(function(use)
   -- Packer can manage itself
   use 'wbthomason/packer.nvim'
 
-  -- LSP Zero for simplifying LSP setup
-  use {
-    'VonHeikemen/lsp-zero.nvim',
-    branch = 'v2.x',
-    requires = {
-      -- LSP Support
-      {'neovim/nvim-lspconfig', tag = 'v2.11.0'}, -- v3 requires Neovim 0.11+
-      {'williamboman/mason.nvim'},           -- Optional: Installer for LSPs
-      {'williamboman/mason-lspconfig.nvim'}, -- Optional: Mason integration
-
-      -- Autocompletion
-      {'hrsh7th/nvim-cmp'},     -- Required completion engine
-      {'hrsh7th/cmp-nvim-lsp'}, -- Required LSP completions
-      {'L3MON4D3/LuaSnip'},     -- Required snippets engine
-    },
-  }
+  -- Native Neovim 0.11 LSP setup and completion
+  use 'neovim/nvim-lspconfig'
+  use 'williamboman/mason.nvim'
+  use 'williamboman/mason-lspconfig.nvim'
+  use 'hrsh7th/nvim-cmp'
+  use 'hrsh7th/cmp-nvim-lsp'
+  use 'L3MON4D3/LuaSnip'
 
   -- Treesitter for better syntax highlighting and parsing
   use {

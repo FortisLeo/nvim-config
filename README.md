@@ -5,7 +5,7 @@ The configuration is intentionally kept free of machine-specific paths so it can
 
 ## Requirements
 
-- Neovim 0.9 or newer
+- Neovim 0.11 or newer
 - Git
 - A compiler/toolchain for languages you use
 - Optional: Java, Rust, and Python language servers (Mason can install these)
