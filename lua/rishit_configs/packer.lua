@@ -25,7 +25,7 @@ return require("packer").startup(function(use)
     branch = 'v2.x',
     requires = {
       -- LSP Support
-      {'neovim/nvim-lspconfig'},             -- Required core LSP config
+      {'neovim/nvim-lspconfig', tag = 'v2.11.0'}, -- v3 requires Neovim 0.11+
       {'williamboman/mason.nvim'},           -- Optional: Installer for LSPs
       {'williamboman/mason-lspconfig.nvim'}, -- Optional: Mason integration
 
