@@ -49,6 +49,94 @@ The leader key is `<Space>`.
 - `<leader>r`: save and compile/run the current Java file
 - `gd`, `K`, `<leader>vca`, `<leader>vrn`: common LSP actions
 
+## Plugin guide and power-user workflow
+
+### Packer
+
+Packer manages the plugins declared in `lua/rishit_configs/packer.lua`:
+
+- `:PackerSync`: install/update plugins and regenerate the compiled loader
+- `:PackerUpdate`: update installed plugins
+- `:PackerCompile`: regenerate the loader after editing the plugin list
+- `:PackerClean`: remove plugins no longer declared
+- `:PackerStatus`: inspect plugin state
+
+Restart Neovim after a major plugin update. The generated `plugin/packer_compiled.lua` is local-only and ignored by Git.
+
+### nvim-tree
+
+Use `<leader>e` to toggle the file tree. Inside the tree, press `?` to see all available actions. Common actions include:
+
+- `<CR>` or `o`: open the selected file
+- `a`: create a file or directory (`name/` creates a directory)
+- `d`: delete
+- `r`: rename
+- `x`: cut, `c`: copy, `p`: paste
+- `R`: refresh
+- `H`: toggle hidden files
+- `q`: close the tree
+
+The tree follows the current working directory. Use `:NvimTreeFindFile` to reveal the current buffer in the tree.
+
+### Telescope
+
+- `<leader><Enter>`: search files
+- `<leader>/`: live grep through the project
+
+Inside Telescope, use `<C-n>`/`<C-p>` or arrow keys to move, `<CR>` to select, `<C-x>` to open in a split, `<C-v>` to open in a vertical split, and `<C-t>` to open in a tab. Press `<C-q>` to send selected results to the quickfix list and `<Esc>` to close. Telescope ignores `.git`, `target`, and `build` directories.
+
+### LSP and Mason
+
+Mason installs and manages `rust_analyzer` and `jedi_language_server`:
+
+- `:Mason`: open the package manager
+- `:MasonInstall <package>`: install a server or tool
+- `:MasonUpdate`: update the registry
+- `:LspInfo`: inspect servers attached to the current buffer
+- `:checkhealth vim.lsp`: diagnose LSP problems
+
+LSP mappings are buffer-local and become available when a server attaches:
+
+- `gd`: go to definition
+- `K`: hover documentation
+- `<leader>vws`: workspace symbols
+- `<leader>vd`: diagnostics in a floating window
+- `[d` / `]d`: next/previous diagnostic
+- `<leader>vca`: code action
+- `<leader>vrr`: references
+- `<leader>vrn`: rename symbol
+- `<C-h>` in insert mode: signature help
+
+### nvim-cmp completion
+
+In insert mode, `<C-n>` and `<C-p>` navigate completion results, `<C-y>` confirms the selected item, and `<C-Space>` manually opens completion. `<Esc>` closes the menu. LuaSnip is installed as the snippet engine.
+
+### nvim-autopairs
+
+`nvim-autopairs` automatically closes brackets, parentheses, and quotes while you type. The old custom mappings were removed, so there is now one consistent pairing implementation. Press `<BS>` inside an empty pair to remove both characters; pressing the closing character skips over an existing closing character. Press `<CR>` inside pairs for the plugin's configured pair formatting.
+
+### vim-tmux-navigator
+
+With tmux running, use `<C-h>`, `<C-j>`, `<C-k>`, and `<C-l>` to move between Neovim splits and tmux panes. The same keys work from both Neovim and tmux. Add the following to `~/.tmux.conf` if the keys do not work from tmux:
+
+```tmux
+set -g @plugin 'christoomey/vim-tmux-navigator'
+run '~/.tmux/plugins/tpm/tpm'
+```
+
+If you do not use tmux, these mappings simply behave like normal split navigation when supported by the plugin.
+
+### Treesitter
+
+Treesitter provides syntax highlighting and installs the configured parsers automatically. Use `:TSUpdate` to update parsers, `:TSInstall <language>` to add one, and `:TSInstallInfo` to inspect parser status.
+
+### Java and file templates
+
+- `<leader>r` in a Java buffer saves, compiles, and runs the class.
+- New `.java` files receive a class template based on the filename.
+- New `.cpp` files receive the template in `lua/rishit_configs/templates/CpSkeleton.cpp`.
+- `<S-CR>` in insert mode opens a new line below the current line.
+
 ## Updating
 
 ```vim

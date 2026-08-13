@@ -74,11 +74,19 @@ return require("packer").startup(function(use)
     "windwp/nvim-autopairs",
     event = "InsertEnter",
     config = function()
-        require("nvim-autopairs").setup ({map_cr = true})
-    end
-}
+      require("nvim-autopairs").setup({ map_cr = true })
+    end,
+  }
 
+  -- File tree
+  use {
+    "nvim-tree/nvim-tree.lua",
+    requires = { "nvim-tree/nvim-web-devicons" },
+    config = function()
+      require("nvim-tree").setup({})
+    end,
+  }
 
-
+  -- Seamless movement between Neovim and tmux panes
+  use "christoomey/vim-tmux-navigator"
 end)
-

@@ -18,9 +18,8 @@ end
 
 vim.keymap.set("n", "<leader>r", run_java, { desc = "Compile and run Java file" })
 
-
-vim.api.nvim_set_keymap('i', '{', '{}<Esc>i', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('i', '(', '()<Esc>i', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('i', '"', '""<Esc>i', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('i', "'", "''<Esc>i", { noremap = true, silent = true })
+-- nvim-tree
+vim.keymap.set("n", "<leader>e", function()
+  require("nvim-tree.api").tree.toggle()
+end, { desc = "Toggle file tree" })
 
