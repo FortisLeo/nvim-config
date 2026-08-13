@@ -7,12 +7,12 @@ if not (ok_mason and ok_mason_lsp and ok_cmp) then
 end
 
 mason.setup()
-mason_lspconfig.setup({
-  ensure_installed = { "rust_analyzer", "jedi_language_server" },
-})
+  mason_lspconfig.setup({
+    ensure_installed = { "rust_analyzer", "pyright" },
+  })
 
 local capabilities = require("cmp_nvim_lsp").default_capabilities()
-local servers = { "rust_analyzer", "jedi_language_server" }
+local servers = { "rust_analyzer", "pyright" }
 
 for _, server in ipairs(servers) do
   vim.lsp.config(server, { capabilities = capabilities })

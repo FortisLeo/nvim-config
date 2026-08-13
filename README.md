@@ -8,8 +8,8 @@ The configuration is intentionally kept free of machine-specific paths so it can
 - Neovim 0.11 or newer
 - Git
 - A compiler/toolchain for languages you use
-- Optional: Java, Rust, and Python language servers (Mason can install these)
-- Optional: Discord desktop for `presence.nvim`
+- Optional: Node.js and npm for Treesitter parser compilation and Pyright
+- Optional: a C compiler/toolchain for Treesitter parsers
 
 ## Installation
 
@@ -31,7 +31,22 @@ Start Neovim. Packer is bootstrapped automatically into Neovim's data directory.
 :PackerSync
 ```
 
-Restart Neovim after synchronization. Run `:checkhealth` if something does not work. Treesitter parsers are installed automatically; they can also be updated with `:TSUpdate`.
+Mason installs `rust_analyzer` and `pyright` automatically. Pyright uses Node.js and npm; make sure `node --version` and `npm --version` work if you use Python LSP features.
+
+Treesitter does not auto-install parsers during startup. Install the parsers you need manually, for example:
+
+```vim
+:TSInstall c cpp java lua markdown markdown_inline python query vim vimdoc
+:TSUpdate
+```
+
+Parser compilation needs a C compiler. On Debian/Ubuntu, install the prerequisites with:
+
+```sh
+sudo apt install build-essential
+```
+
+The external `tree-sitter` CLI is not required by this configuration.
 
 If SSH authentication is not configured, use the HTTPS repository URL instead:
 
@@ -87,7 +102,7 @@ Inside Telescope, use `<C-n>`/`<C-p>` or arrow keys to move, `<CR>` to select, `
 
 ### LSP and Mason
 
-Mason installs and manages `rust_analyzer` and `jedi_language_server`:
+Mason installs and manages `rust_analyzer` and `pyright`:
 
 - `:Mason`: open the package manager
 - `:MasonInstall <package>`: install a server or tool
@@ -128,7 +143,7 @@ If you do not use tmux, these mappings simply behave like normal split navigatio
 
 ### Treesitter
 
-Treesitter provides syntax highlighting and installs the configured parsers automatically. Use `:TSUpdate` to update parsers, `:TSInstall <language>` to add one, and `:TSInstallInfo` to inspect parser status.
+Treesitter provides syntax highlighting. Parsers are intentionally installed manually so a missing external CLI cannot trigger repeated startup errors. Use `:TSInstall <language>` to add a parser, `:TSUpdate` to update parsers, and `:TSInstallInfo` to inspect parser status.
 
 ### Java and file templates
 
